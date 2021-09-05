@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className="flex-column-center">
       <p>Aditya Saxena | 2021</p>
-      <div className="flex-row">
+      <div className="icon-container">
         <a href="linkedin.com/in/adityasaxena012">
           <FaLinkedinIn />
         </a>
