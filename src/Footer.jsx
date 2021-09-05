@@ -6,13 +6,25 @@ const Footer = () => {
     <div className="flex-column-center">
       <p>Aditya Saxena | 2021</p>
       <div className="icon-container">
-        <a href="linkedin.com/in/adityasaxena012">
+        <a
+          href="https://www.linkedin.com/in/adityasaxena012"
+          target="_blank"
+          rel="noreferrer"
+        >
           <FaLinkedinIn />
         </a>
-        <a href="github.com/asaxena012">
+        <a
+          href="https://www.github.com/asaxena012"
+          target="_blank"
+          rel="noreferrer"
+        >
           <FaGithub />
         </a>
-        <a href="twitter.com/keenAadi">
+        <a
+          href="https://www.twitter.com/keenAadi"
+          target="_blank"
+          rel="noreferrer"
+        >
           <FaTwitter />
         </a>
       </div>
