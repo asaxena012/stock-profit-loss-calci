@@ -1,0 +1,73 @@
+:root {
+  --primary-color: #f4a261;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+.App,
+#root {
+  height: 100%;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: sans-serif;
+  text-align: center;
+  background: #f1faee;
+}
+
+input {
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  outline: none;
+  border: 2px solid var(--primary-color);
+  min-width: 17rem;
+  margin: 1.5rem;
+}
+
+button {
+  background: var(--primary-color);
+  outline: none;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin: 1.5rem;
+  box-shadow: 1px 2px 10px #adb5bd;
+}
+
+label {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+h1 {
+  margin: 2.5rem 0rem 3rem 0rem;
+}
+
+.error {
+  color: red;
+  margin: 1rem;
+}
+
+.output {
+  font-size: 1.3rem;
+  margin: 1rem;
+}
+
+/* Utilities */
+
+.flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
