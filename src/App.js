@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "./styles.css";
 import Footer from "./Footer";
+import { themes, themeColor } from "./themeHelper";
 
 export default function App() {
   const [initPrice, setInitPrice] = useState(null);
@@ -8,6 +9,17 @@ export default function App() {
   const [currentPrice, setCurrentPrice] = useState(null);
   const [showOutput, setShowOutput] = useState(false);
   const [error, setError] = useState(false);
+  const appRef = useRef();
+
+  const updateTheme = (profitPC, lossPC) => {
+    if (profitPC != null && profitPC > 50) {
+      appRef.current.style.backgroundColor = themeColor[themes.profit];
+    } else if (lossPC != null && lossPC >= 50) {
+      appRef.current.style.backgroundColor = themeColor[themes.loss];
+    } else {
+      appRef.current.style.backgroundColor = themeColor[themes.default];
+    }
+  };
 
   const calculatePL = () => {
     const profitOrLoss = quantity * (currentPrice - initPrice);
@@ -28,6 +40,11 @@ export default function App() {
 
   const getOutput = () => {
     const pl = calculatePL();
+    const profitPC = pl > 0 ? (pl / (initPrice * quantity)) * 100 : null;
+    const lossPC = pl < 0 ? ((-1 * pl) / (initPrice * quantity)) * 100 : null;
+
+    if (pl) updateTheme(profitPC, lossPC);
+
     if (pl === 0) {
       return (
         <p>
@@ -40,9 +57,7 @@ export default function App() {
     if (pl > 0) {
       return (
         <p>
-          {`You are in a profit of ${pl} which is ${
-            (pl / (initPrice * quantity)) * 100
-          }% of your initial total investment`}
+          {`You are in a profit of ${pl} which is ${profitPC}% of your initial total investment`}
         </p>
       );
     }
@@ -50,9 +65,9 @@ export default function App() {
     if (pl < 0) {
       return (
         <p>
-          {`You are in a loss of ${pl * -1} which is ${
-            ((-1 * pl) / (initPrice * quantity)) * 100
-          }% of your initial total investment`}
+          {`You are in a loss of ${
+            pl * -1
+          } which is ${lossPC}% of your initial total investment`}
         </p>
       );
     }
@@ -61,7 +76,7 @@ export default function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App" ref={appRef}>
       <div className="main-container flex-column-center">
         <h1>Stock Profit & Loss Calculator</h1>
         <label>Initial price: </label>
@@ -93,7 +108,7 @@ export default function App() {
 
         <button onClick={submitHandler}>Calculate</button>
 
-        <p className="output">{showOutput && getOutput()}</p>
+        <span className="output">{showOutput && getOutput()}</span>
         {error && (
           <p className="error">
             Some error occured. Please check if all the values are entered
